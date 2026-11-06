@@ -1,0 +1,149 @@
+{
+    "enable_natural_language": {
+        "description": "自然语言触发（Agent工具）",
+        "type": "bool",
+        "default": true,
+        "hint": "开启后可直接聊天让Agent调用Agnes画图、改图或生成视频，无需指令。需要聊天模型支持工具调用，且当前人格允许Agnes工具。关闭后保留手动指令，已接收的任务继续完成。",
+        "obvious_hint": true
+    },
+    "show_generation_details": {
+        "description": "显示生成参数详情",
+        "type": "bool",
+        "default": false,
+        "hint": "默认仅显示简短进度；开启后手动调用会显示模型、比例、分辨率等详细参数。"
+    },
+    "api_key": {
+        "description": "Agnes API 密钥",
+        "type": "string",
+        "default": "",
+        "hint": "在 Agnes 平台创建的 API Key，必填。",
+        "obvious_hint": true
+    },
+    "api_base_url": {
+        "description": "API 基础地址",
+        "type": "string",
+        "default": "https://apihub.agnes-ai.com/v1",
+        "hint": "可填写带 /v1 的地址或服务根地址；自定义代理也应实现新版 Agnes API。"
+    },
+    "default_image_model": {
+        "description": "默认图片模型",
+        "type": "string",
+        "default": "agnes-image-2.5-flash",
+        "options": [
+            "agnes-image-2.5-flash",
+            "agnes-image-2.1-flash",
+            "agnes-image-2.0-flash"
+        ],
+        "hint": "新安装默认使用 2.5；已有图片模型配置保留，也可通过 --model= 指定。"
+    },
+    "default_image_size": {
+        "description": "默认图片分辨率",
+        "type": "string",
+        "default": "1K",
+        "options": [
+            "1K",
+            "2K",
+            "3K",
+            "4K"
+        ],
+        "hint": "配合宽高比使用，不再把 16:9 图片缩为 4:3。"
+    },
+    "image_response_format": {
+        "description": "图片返回格式",
+        "type": "string",
+        "default": "url",
+        "options": [
+            "url",
+            "b64_json"
+        ],
+        "hint": "支持 URL 与 Base64；部分平台无法下载图片 URL 时可选 b64_json。"
+    },
+    "default_video_model": {
+        "description": "默认视频模型",
+        "type": "string",
+        "default": "agnes-video-2.5-flash",
+        "options": [
+            "agnes-video-2.5-flash",
+            "agnes-video-2.5"
+        ],
+        "hint": "旧 v2.0 自动迁移到 2.5 Flash；普通 2.5 按平台规则计费，插件不会自动切换到普通版。"
+    },
+    "default_video_size": {
+        "description": "默认视频分辨率",
+        "type": "string",
+        "default": "720P",
+        "options": [
+            "720P",
+            "1080P",
+            "1K",
+            "2K"
+        ],
+        "hint": "Flash 只支持 720P；1080P/1K/2K 需要选择普通 agnes-video-2.5。"
+    },
+    "default_aspect_ratio": {
+        "description": "默认输出比例",
+        "type": "string",
+        "default": "16:9",
+        "options": [
+            "16:9",
+            "9:16",
+            "1:1",
+            "4:3",
+            "3:4",
+            "21:9"
+        ],
+        "hint": "图片指令另支持 2:3、3:2。附图时未指定比例会尝试从原图推断。"
+    },
+    "default_video_duration": {
+        "description": "默认视频时长（秒）",
+        "type": "int",
+        "default": 5,
+        "options": [
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10,
+            11,
+            12
+        ],
+        "hint": "新版视频支持 4–12 秒整数；不再使用 num_frames/frame_rate。"
+    },
+    "video_image_source": {
+        "description": "视频参考图来源",
+        "type": "string",
+        "default": "auto",
+        "options": [
+            "auto",
+            "direct",
+            "file_service"
+        ],
+        "hint": "auto 优先 AstrBot 文件服务，不可用时尝试平台公网 URL；file_service 需设置公网 callback_api_base。视频不接受 Base64。"
+    },
+    "download_video": {
+        "description": "下载后发送视频",
+        "type": "bool",
+        "default": true,
+        "hint": "默认下载后发送，失败时回退 URL。协议端与机器人不共享文件系统时可关闭此项。临时文件保留1小时后清理。"
+    },
+    "request_timeout": {
+        "description": "单次 API 请求超时（秒）",
+        "type": "int",
+        "default": 180,
+        "hint": "图片生成或视频创建的单次请求超时；生成请求不会自动重试。"
+    },
+    "video_poll_interval": {
+        "description": "视频轮询间隔（秒）",
+        "type": "int",
+        "default": 2,
+        "hint": "最低1秒；网络故障、429和服务端错误会退避重试。"
+    },
+    "video_poll_timeout": {
+        "description": "视频等待超时（秒）",
+        "type": "int",
+        "default": 600,
+        "hint": "按实际经过时间计算。超时可用 /agnes_query 查询原任务，无需重新生成。"
+    }
+}

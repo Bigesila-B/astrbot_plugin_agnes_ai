@@ -1,0 +1,6 @@
+name: agnes_ai
+display_name: Agnes AI 模型调用
+desc: Agnes 图片与视频生成，支持中文简短指令、Agent自然语言工具调用和首尾帧控制
+version: v2.1.0
+author: Bigesila-B
+repo: https://github.com/Bigesila-B/astrbot_plugin_agnes_ai
