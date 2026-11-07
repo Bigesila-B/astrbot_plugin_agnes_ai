@@ -64,7 +64,7 @@ HELP = """Agnes AI 2.1
 视频图片需公网URL，本地图片需配置公网callback_api_base。"""
 
 
-@register("agnes_ai", "Bigesila-B", "Agnes 图片视频生成，支持中文指令与 Agent 自然语言调用", "2.1.0")
+@register("agnes_ai", "Bigesila-B", "Agnes 图片视频生成，支持中文指令与 Agent 自然语言调用", "2.1.1")
 class AgnesAIPlugin(Star):
     def __init__(self, context: Context, config: AstrBotConfig):
         super().__init__(context)
